@@ -211,4 +211,201 @@ h2 {
     h1 {
         font-size: 2.2rem;
     }
+
+    .chart-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Premium Hover effects & Chart Card */
+.hover-glow:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+}
+
+.visualization-node {
+    margin-top: 60px;
+    cursor: default;
+}
+
+.final-marker {
+    background-color: #fca5a5;
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.6), 0 0 20px rgba(248, 113, 113, 0.4);
+}
+
+.final-marker:hover {
+    background-color: #ef4444;
+}
+
+.visualization-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+    padding: 10px;
+}
+
+.chart-wrapper {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+    padding: 10px;
+}
+
+.stats-box {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.stat {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.stat-value.highlight {
+    color: #38bdf8;
+    background: -webkit-linear-gradient(#38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.2rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Realtime Judge Tool UI */
+.interactive-marker {
+    background-color: #facc15;
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.6), 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+.interactive-marker:hover {
+    background-color: #eab308;
+}
+
+.judge-node {
+    margin-top: 40px;
+}
+
+.judge-app {
+    margin-top: 20px;
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.input-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 80px;
+    font-family: var(--font-body);
+    transition: border 0.3s ease;
+}
+
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.compare-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .compare-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+.judge-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+    margin-top: 5px;
+    font-family: var(--font-heading);
+}
+
+.judge-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+}
+
+.judge-btn:active {
+    transform: translateY(0);
+}
+
+.verdict-box {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+.verdict-box.hidden {
+    display: none;
 }

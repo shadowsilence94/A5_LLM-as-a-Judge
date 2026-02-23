@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,12 +24,12 @@
             <!-- Step 1 -->
             <div class="timeline-item" onclick="toggleDetails('step1')">
                 <div class="timeline-marker"></div>
-                <div class="timeline-content glass">
+                <div class="timeline-content glass hover-glow">
                     <h2>Task 1: Dataset Preparation</h2>
                     <p>Loading the core truth/hallucination classification dataset.</p>
                     <div id="step1" class="details hidden">
                         <hr>
-                        <p><strong>Action:</strong> Utilizing <code>jondurbin/truthy-dpo-v0.11</code> from the Hugging Face hub.</p>
+                        <p><strong>Action:</strong> Utilizing <code>jondurbin/truthy-dpo-v0.1</code> from the Hugging Face hub.</p>
                         <p><strong>Purpose:</strong> To map prompts to "chosen" (factual) and "rejected" (hallucinated) responses, providing a clear pairwise optimization signal.</p>
                     </div>
                 </div>
@@ -36,7 +38,7 @@
             <!-- Step 2 -->
             <div class="timeline-item" onclick="toggleDetails('step2')">
                 <div class="timeline-marker"></div>
-                <div class="timeline-content glass">
+                <div class="timeline-content glass hover-glow">
                     <h2>Task 2: Model Training via DPO</h2>
                     <p>Direct Preference Optimization using Hugging Face TRL and LoRA Adapters.</p>
                     <div id="step2" class="details hidden">
@@ -50,12 +52,12 @@
             <!-- Step 3 -->
             <div class="timeline-item" onclick="toggleDetails('step3')">
                 <div class="timeline-marker"></div>
-                <div class="timeline-content glass">
+                <div class="timeline-content glass hover-glow">
                     <h2>Task 3: Hugging Face Hub Integration</h2>
                     <p>Persisting checkpoints and sharing the verified weights.</p>
                     <div id="step3" class="details hidden">
                         <hr>
-                        <p><strong>Action:</strong> Employing <code>huggingface-cli login</code> and the `push_to_hub` endpoint integration.</p>
+                        <p><strong>Action:</strong> Employing the native <code>huggingface_hub</code> Python API with local tokens natively.</p>
                         <p><strong>Purpose:</strong> Allows immediate access to the fine-tuned model weights across varying runtime environments seamlessly.</p>
                     </div>
                 </div>
@@ -64,13 +66,63 @@
             <!-- Step 4 -->
             <div class="timeline-item" onclick="toggleDetails('step4')">
                 <div class="timeline-marker"></div>
-                <div class="timeline-content glass">
+                <div class="timeline-content glass hover-glow">
                     <h2>Task 4: Evaluation: LLM-as-a-Judge</h2>
                     <p>Automated evaluation protocol leveraging AlpacaEval metrics.</p>
                     <div id="step4" class="details hidden">
                         <hr>
                         <p><strong>Action:</strong> Running structured inference against a deterministic Judge LLM (such as GPT-4o-mini). </p>
                         <p><strong>Purpose:</strong> Compares the baseline model versus the newly trained DPO variant, aggregating pairwise judgments to compute a final, quantifiable Win Rate.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Visualization Section -->
+            <div class="timeline-item visualization-node">
+                <div class="timeline-marker final-marker"></div>
+                <div class="timeline-content glass visualization-card">
+                    <h2>Evaluation Results Dashboard</h2>
+                    <p>Final LLM-as-a-Judge Win Rate Visualizations (DPO vs Base Qwen Model)</p>
+                    <div class="chart-container">
+                        <div class="chart-wrapper">
+                            <canvas id="winRateChart"></canvas>
+                        </div>
+                        <div class="stats-box">
+                            <div class="stat"><span class="stat-value highlight">60.0%</span><span class="stat-label">Win Rate</span></div>
+                            <div class="stat"><span class="stat-value">6</span><span class="stat-label">Model B Wins</span></div>
+                            <div class="stat"><span class="stat-value">6</span><span class="stat-label">Ties</span></div>
+                            <div class="stat"><span class="stat-value">3</span><span class="stat-label">Model A Wins</span></div>
+                            <div class="stat"><span class="stat-value">15</span><span class="stat-label">Total Prompts</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Judge Web App Section -->
+            <div class="timeline-item judge-node">
+                <div class="timeline-marker interactive-marker"></div>
+                <div class="timeline-content glass hover-glow">
+                    <h2>Real-time LLM Judge Inference</h2>
+                    <p>Test the Gemini-1.5-Flash judge directly within the web app!</p>
+                    <div class="judge-app">
+                        <div class="input-group">
+                            <label>User Instruction</label>
+                            <textarea id="judge-instruction" placeholder="e.g. Why is the sky blue?"></textarea>
+                        </div>
+                        <div class="compare-group">
+                            <div class="input-group">
+                                <label>Model A (Base Model)</label>
+                                <textarea id="judge-model-a" placeholder="Base model response..."></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label>Model B (DPO Model)</label>
+                                <textarea id="judge-model-b" placeholder="DPO aligned response..."></textarea>
+                            </div>
+                        </div>
+                        <button class="judge-btn" onclick="runRealtimeJudge()">Evaluate with Gemini</button>
+                        <div id="judge-verdict-box" class="verdict-box hidden">
+                            <span id="judge-result">-</span>
+                        </div>
                     </div>
                 </div>
             </div>
