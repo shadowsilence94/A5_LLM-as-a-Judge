@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A5: Optimization & LLM-as-a-Judge Flow</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <h1>Project A5 Progress Flow</h1>
+            <p>Optimization of Human Preference and Evaluating Factuality by LLM-as-a-Judge</p>
+        </header>
+
+        <section class="timeline">
+            <!-- Step 1 -->
+            <div class="timeline-item" onclick="toggleDetails('step1')">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content glass">
+                    <h2>Task 1: Dataset Preparation</h2>
+                    <p>Loading the core truth/hallucination classification dataset.</p>
+                    <div id="step1" class="details hidden">
+                        <hr>
+                        <p><strong>Action:</strong> Utilizing <code>jondurbin/truthy-dpo-v0.11</code> from the Hugging Face hub.</p>
+                        <p><strong>Purpose:</strong> To map prompts to "chosen" (factual) and "rejected" (hallucinated) responses, providing a clear pairwise optimization signal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="timeline-item" onclick="toggleDetails('step2')">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content glass">
+                    <h2>Task 2: Model Training via DPO</h2>
+                    <p>Direct Preference Optimization using Hugging Face TRL and LoRA Adapters.</p>
+                    <div id="step2" class="details hidden">
+                        <hr>
+                        <p><strong>Action:</strong> Implementing <code>DPOTrainer</code> on the <code>Qwen/Qwen2.5-1.5B-Instruct</code> architecture.</p>
+                        <p><strong>Purpose:</strong> Adjusts model likelihoods intrinsically, avoiding complex Reinforcement Learning with Human Feedback (RLHF) loops while still perfectly aligning the model to factual responses.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="timeline-item" onclick="toggleDetails('step3')">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content glass">
+                    <h2>Task 3: Hugging Face Hub Integration</h2>
+                    <p>Persisting checkpoints and sharing the verified weights.</p>
+                    <div id="step3" class="details hidden">
+                        <hr>
+                        <p><strong>Action:</strong> Employing <code>huggingface-cli login</code> and the `push_to_hub` endpoint integration.</p>
+                        <p><strong>Purpose:</strong> Allows immediate access to the fine-tuned model weights across varying runtime environments seamlessly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="timeline-item" onclick="toggleDetails('step4')">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content glass">
+                    <h2>Task 4: Evaluation: LLM-as-a-Judge</h2>
+                    <p>Automated evaluation protocol leveraging AlpacaEval metrics.</p>
+                    <div id="step4" class="details hidden">
+                        <hr>
+                        <p><strong>Action:</strong> Running structured inference against a deterministic Judge LLM (such as GPT-4o-mini). </p>
+                        <p><strong>Purpose:</strong> Compares the baseline model versus the newly trained DPO variant, aggregating pairwise judgments to compute a final, quantifiable Win Rate.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

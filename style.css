@@ -1,0 +1,214 @@
+/* Define core design variables */
+:root {
+    --bg-color-dark: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.4);
+    --glass-bg: rgba(30, 41, 59, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* Base Reset & Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+body {
+    background-color: var(--bg-color-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Subtle background animated gradient */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 15% 50%, rgba(30, 58, 138, 0.3), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(15, 118, 110, 0.2), transparent 50%);
+    z-index: -1;
+    animation: pulse 15s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Layout container */
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    margin: 40px auto;
+}
+
+/* Header Typography */
+header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+/* Timeline Layout */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, #38bdf8, transparent);
+    border-radius: 2px;
+}
+
+/* Timeline Iteration Item */
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+/* The interactive pointer node */
+.timeline-marker {
+    position: absolute;
+    left: -37px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.timeline-item:hover .timeline-marker {
+    transform: scale(1.4);
+    background-color: #fff;
+}
+
+/* Glassmorphism Card Style */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.timeline-item:hover .glass {
+    transform: translateX(10px) translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(40, 53, 75, 0.7);
+}
+
+/* Internal Card Typography */
+h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.glass > p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Expanding Details Panel */
+.details {
+    margin-top: 15px;
+    overflow: hidden;
+    max-height: 500px;
+    opacity: 1;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s ease;
+}
+
+.details.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.details hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin: 15px 0;
+}
+
+.details p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.details strong {
+    color: var(--accent-color);
+}
+
+/* Utility to animate on load */
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.timeline-item {
+    animation: slideUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+}
