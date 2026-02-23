@@ -105,18 +105,18 @@
                     <h2>Real-time LLM Judge Inference</h2>
                     <p>Test the Gemini-2.5-Flash judge directly within the web app!</p>
                     <div class="judge-app">
-                        <div class="input-group">
+                        <div class="input-group full-width">
                             <label>User Instruction</label>
-                            <textarea id="judge-instruction" placeholder="e.g. Why is the sky blue?"></textarea>
+                            <textarea id="judge-instruction" placeholder="e.g. Can you explain why the sky is blue?"></textarea>
                         </div>
                         <div class="compare-group">
                             <div class="input-group">
                                 <label>Model A (Base Model)</label>
-                                <textarea id="judge-model-a" placeholder="Base model response..."></textarea>
+                                <textarea id="judge-model-a" placeholder="e.g. The sky is blue because water in the ocean reflects light back into the sky."></textarea>
                             </div>
                             <div class="input-group">
                                 <label>Model B (DPO Model)</label>
-                                <textarea id="judge-model-b" placeholder="DPO aligned response..."></textarea>
+                                <textarea id="judge-model-b" placeholder="e.g. The sky is blue due to Rayleigh scattering. Gases in the Earth's atmosphere scatter shorter blue wavelengths of sunlight more efficiently than longer red wavelengths."></textarea>
                             </div>
                         </div>
                         <button class="judge-btn" onclick="runRealtimeJudge()">Evaluate with Gemini</button>
