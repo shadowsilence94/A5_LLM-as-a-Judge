@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         data: {
             labels: ['Model B (DPO) Wins', 'Ties', 'Model A (Base) Wins'],
             datasets: [{
-                data: [6, 6, 3],
+                data: [6, 8, 1],
                 backgroundColor: [gradientWin, gradientTie, gradientLoss],
                 borderWidth: 0,
                 hoverOffset: 15
