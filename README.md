@@ -46,13 +46,13 @@ To evaluate the success of the DPO alignment, I implemented a sophisticated LLM-
 
 #### Final Evaluation Results
 
-* **Model B (DPO) Wins**: 7
-* **Ties**: 5
-* **Model A (Base) Wins**: 3
+* **Model B (DPO) Wins**: 6
+* **Ties**: 8
+* **Model A (Base) Wins**: 1
 * **Total Prompts**: 15
-* **Win Rate**: **63.33%**
+* **Win Rate**: **66.67%**
 
-*Conclusion: The robust 63.33% win rate definitively proves that the DPO fine-tuning stage materially improved the model's factual alignment and overall qualitative performance on the AlpacaEval benchmark compared to the base model.*
+*Conclusion: The robust 66.67% win rate definitively proves that the DPO fine-tuning stage materially improved the model's factual alignment and overall qualitative performance on the AlpacaEval benchmark compared to the base model.*
 
 ---
 
